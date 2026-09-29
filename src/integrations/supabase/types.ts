@@ -14,7 +14,168 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      configuracoes: {
+        Row: {
+          chave: string
+          id: string
+          updated_at: string
+          valor: number
+        }
+        Insert: {
+          chave: string
+          id?: string
+          updated_at?: string
+          valor?: number
+        }
+        Update: {
+          chave?: string
+          id?: string
+          updated_at?: string
+          valor?: number
+        }
+        Relationships: []
+      }
+      despesas: {
+        Row: {
+          categoria: string
+          created_at: string
+          data_pagamento: string | null
+          data_vencimento: string | null
+          descricao: string | null
+          forma_pagamento: string | null
+          fornecedor: string | null
+          id: string
+          mes_referencia: string | null
+          observacoes: string | null
+          status: string
+          valor: number | null
+        }
+        Insert: {
+          categoria: string
+          created_at?: string
+          data_pagamento?: string | null
+          data_vencimento?: string | null
+          descricao?: string | null
+          forma_pagamento?: string | null
+          fornecedor?: string | null
+          id?: string
+          mes_referencia?: string | null
+          observacoes?: string | null
+          status?: string
+          valor?: number | null
+        }
+        Update: {
+          categoria?: string
+          created_at?: string
+          data_pagamento?: string | null
+          data_vencimento?: string | null
+          descricao?: string | null
+          forma_pagamento?: string | null
+          fornecedor?: string | null
+          id?: string
+          mes_referencia?: string | null
+          observacoes?: string | null
+          status?: string
+          valor?: number | null
+        }
+        Relationships: []
+      }
+      folha_pagamento: {
+        Row: {
+          cargo: string | null
+          created_at: string
+          custo_total: number | null
+          data_pagamento: string | null
+          fgts: number | null
+          funcionario: string
+          id: string
+          inss: number | null
+          mes_referencia: string | null
+          observacoes: string | null
+          outros_descontos: number | null
+          plantao_extra: number | null
+          salario_bruto: number | null
+          salario_liquido: number | null
+          status: string
+          vale_transporte: number | null
+        }
+        Insert: {
+          cargo?: string | null
+          created_at?: string
+          custo_total?: number | null
+          data_pagamento?: string | null
+          fgts?: number | null
+          funcionario: string
+          id?: string
+          inss?: number | null
+          mes_referencia?: string | null
+          observacoes?: string | null
+          outros_descontos?: number | null
+          plantao_extra?: number | null
+          salario_bruto?: number | null
+          salario_liquido?: number | null
+          status?: string
+          vale_transporte?: number | null
+        }
+        Update: {
+          cargo?: string | null
+          created_at?: string
+          custo_total?: number | null
+          data_pagamento?: string | null
+          fgts?: number | null
+          funcionario?: string
+          id?: string
+          inss?: number | null
+          mes_referencia?: string | null
+          observacoes?: string | null
+          outros_descontos?: number | null
+          plantao_extra?: number | null
+          salario_bruto?: number | null
+          salario_liquido?: number | null
+          status?: string
+          vale_transporte?: number | null
+        }
+        Relationships: []
+      }
+      mensalidades: {
+        Row: {
+          created_at: string
+          data_pagamento: string | null
+          data_vencimento: string | null
+          forma_pagamento: string | null
+          id: string
+          mes_referencia: string | null
+          observacoes: string | null
+          residente: string
+          status: string
+          valor: number | null
+        }
+        Insert: {
+          created_at?: string
+          data_pagamento?: string | null
+          data_vencimento?: string | null
+          forma_pagamento?: string | null
+          id?: string
+          mes_referencia?: string | null
+          observacoes?: string | null
+          residente: string
+          status?: string
+          valor?: number | null
+        }
+        Update: {
+          created_at?: string
+          data_pagamento?: string | null
+          data_vencimento?: string | null
+          forma_pagamento?: string | null
+          id?: string
+          mes_referencia?: string | null
+          observacoes?: string | null
+          residente?: string
+          status?: string
+          valor?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
