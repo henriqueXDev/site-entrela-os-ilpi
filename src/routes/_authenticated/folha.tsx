@@ -15,6 +15,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useRole } from "@/lib/use-role";
 import { supabase } from "@/integrations/supabase/client";
 import {
   brl,
@@ -119,7 +120,7 @@ function FolhaPage() {
                     {brl(folhaTotal(r))}
                   </td>
                   <td className="px-4 py-2">
-                    <div className="flex justify-end gap-1">
+                    {canEdit && (<div className="flex justify-end gap-1">
                       <Button
                         size="sm"
                         variant="ghost"
