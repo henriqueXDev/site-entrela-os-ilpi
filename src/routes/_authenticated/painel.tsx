@@ -50,7 +50,11 @@ function Painel() {
     const k = monthKey(r.mes_referencia);
     if (k) keys.add(k);
   }
-  const current = [...keys].sort().pop();
+  const hoje = new Date();
+  const hojeKey = `${hoje.getFullYear()}-${String(hoje.getMonth() + 1).padStart(2, "0")}`;
+  const ordenadas = [...keys].sort();
+  const current =
+    ordenadas.filter((k) => k <= hojeKey).pop() ?? ordenadas.pop();
 
   const mesMens = (mens.data ?? []).filter(
     (r) => monthKey(r.mes_referencia) === current,
