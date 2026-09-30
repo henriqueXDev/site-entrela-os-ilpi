@@ -91,8 +91,11 @@ export function dateBR(value: string | null | undefined) {
 /** "2026-08-01" -> { year: 2026, month: 8 } */
 export function ym(value: string | null | undefined) {
   if (!value) return null;
-  const [y, m] = value.slice(0, 10).split("-").map(Number);
-  return { year: y, month: m };
+  const parts = value.slice(0, 10).split("-");
+  const year = Number(parts[0]);
+  const month = Number(parts[1]);
+  if (!Number.isFinite(year) || !Number.isFinite(month)) return null;
+  return { year, month };
 }
 
 export function monthKey(value: string | null | undefined) {
@@ -101,8 +104,9 @@ export function monthKey(value: string | null | undefined) {
 }
 
 export function monthLabel(key: string) {
-  const [y, m] = key.split("-").map(Number);
-  return `${MESES[m - 1]} / ${y}`;
+  const parts = key.split("-");
+  const m = Number(parts[1]);
+  return `${MESES[m - 1] ?? ""} / ${parts[0]}`;
 }
 
 export function matchesPeriod(

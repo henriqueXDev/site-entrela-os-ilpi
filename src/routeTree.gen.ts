@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AuthenticatedDespesasRouteImport } from './routes/_authenticated/despesas'
 import { Route as AuthenticatedEntradasRouteImport } from './routes/_authenticated/entradas'
+import { Route as AuthenticatedFluxoRouteImport } from './routes/_authenticated/fluxo'
 import { Route as AuthenticatedFolhaRouteImport } from './routes/_authenticated/folha'
 import { Route as AuthenticatedMensalidadesRouteImport } from './routes/_authenticated/mensalidades'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
@@ -42,6 +43,11 @@ const AuthenticatedEntradasRoute = AuthenticatedEntradasRouteImport.update({
   path: '/entradas',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedFluxoRoute = AuthenticatedFluxoRouteImport.update({
+  id: '/fluxo',
+  path: '/fluxo',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedFolhaRoute = AuthenticatedFolhaRouteImport.update({
   id: '/folha',
   path: '/folha',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/despesas': typeof AuthenticatedDespesasRoute
   '/entradas': typeof AuthenticatedEntradasRoute
+  '/fluxo': typeof AuthenticatedFluxoRoute
   '/folha': typeof AuthenticatedFolhaRoute
   '/mensalidades': typeof AuthenticatedMensalidadesRoute
   '/painel': typeof AuthenticatedPainelRoute
@@ -73,6 +80,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/despesas': typeof AuthenticatedDespesasRoute
   '/entradas': typeof AuthenticatedEntradasRoute
+  '/fluxo': typeof AuthenticatedFluxoRoute
   '/folha': typeof AuthenticatedFolhaRoute
   '/mensalidades': typeof AuthenticatedMensalidadesRoute
   '/painel': typeof AuthenticatedPainelRoute
@@ -84,6 +92,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/_authenticated/despesas': typeof AuthenticatedDespesasRoute
   '/_authenticated/entradas': typeof AuthenticatedEntradasRoute
+  '/_authenticated/fluxo': typeof AuthenticatedFluxoRoute
   '/_authenticated/folha': typeof AuthenticatedFolhaRoute
   '/_authenticated/mensalidades': typeof AuthenticatedMensalidadesRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
@@ -95,6 +104,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/despesas'
     | '/entradas'
+    | '/fluxo'
     | '/folha'
     | '/mensalidades'
     | '/painel'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/despesas'
     | '/entradas'
+    | '/fluxo'
     | '/folha'
     | '/mensalidades'
     | '/painel'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/_authenticated/despesas'
     | '/_authenticated/entradas'
+    | '/_authenticated/fluxo'
     | '/_authenticated/folha'
     | '/_authenticated/mensalidades'
     | '/_authenticated/painel'
@@ -162,6 +174,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedEntradasRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/fluxo': {
+      id: '/_authenticated/fluxo'
+      path: '/fluxo'
+      fullPath: '/fluxo'
+      preLoaderRoute: typeof AuthenticatedFluxoRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/folha': {
       id: '/_authenticated/folha'
       path: '/folha'
@@ -189,6 +208,7 @@ declare module '@tanstack/react-router' {
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDespesasRoute: typeof AuthenticatedDespesasRoute
   AuthenticatedEntradasRoute: typeof AuthenticatedEntradasRoute
+  AuthenticatedFluxoRoute: typeof AuthenticatedFluxoRoute
   AuthenticatedFolhaRoute: typeof AuthenticatedFolhaRoute
   AuthenticatedMensalidadesRoute: typeof AuthenticatedMensalidadesRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
@@ -197,6 +217,7 @@ interface AuthenticatedRouteRouteChildren {
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDespesasRoute: AuthenticatedDespesasRoute,
   AuthenticatedEntradasRoute: AuthenticatedEntradasRoute,
+  AuthenticatedFluxoRoute: AuthenticatedFluxoRoute,
   AuthenticatedFolhaRoute: AuthenticatedFolhaRoute,
   AuthenticatedMensalidadesRoute: AuthenticatedMensalidadesRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
