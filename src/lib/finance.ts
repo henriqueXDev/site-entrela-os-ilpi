@@ -104,8 +104,9 @@ export function monthKey(value: string | null | undefined) {
 }
 
 export function monthLabel(key: string) {
-  const [y, m] = key.split("-").map(Number);
-  return `${MESES[m - 1]} / ${y}`;
+  const parts = key.split("-");
+  const m = Number(parts[1]);
+  return `${MESES[m - 1] ?? ""} / ${parts[0]}`;
 }
 
 export function matchesPeriod(
