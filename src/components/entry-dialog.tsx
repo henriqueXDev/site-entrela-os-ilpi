@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DespesaForm, FolhaForm, MensalidadeForm } from "@/components/entry-forms";
+import { useRole } from "@/lib/use-role";
 
 export function NewEntryDialog({
   defaultTab = "mensalidade",
@@ -19,6 +20,8 @@ export function NewEntryDialog({
 }) {
   const [open, setOpen] = useState(false);
   const close = () => setOpen(false);
+  const { canEdit } = useRole();
+  if (!canEdit) return null;
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
