@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 
 import { AppLayout, StatCard } from "@/components/app-layout";
@@ -111,9 +111,8 @@ function Fluxo() {
             </thead>
             <tbody className="divide-y">
               {linhas.map((l) => (
-                <>
+                <Fragment key={l.key}>
                   <tr
-                    key={l.key}
                     className="cursor-pointer hover:bg-muted/40"
                     onClick={() => setAberto(aberto === l.key ? null : l.key)}
                   >
@@ -147,7 +146,7 @@ function Fluxo() {
                     </td>
                   </tr>
                   {aberto === l.key && (
-                    <tr key={l.key + "-det"}>
+                    <tr>
                       <td colSpan={5} className="bg-muted/30 px-4 py-4">
                         <div className="grid gap-4 lg:grid-cols-3">
                           <Detalhe
@@ -181,7 +180,7 @@ function Fluxo() {
                       </td>
                     </tr>
                   )}
-                </>
+                </Fragment>
               ))}
               {linhas.length === 0 && (
                 <tr>
