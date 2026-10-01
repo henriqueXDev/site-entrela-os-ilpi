@@ -18,6 +18,7 @@ import { Route as AuthenticatedFluxoRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedFolhaRouteImport } from './routes/_authenticated/folha'
 import { Route as AuthenticatedMensalidadesRouteImport } from './routes/_authenticated/mensalidades'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
+import { Route as AuthenticatedPlanilhaRouteImport } from './routes/_authenticated/planilha'
 import { Route as AuthenticatedUsuariosRouteImport } from './routes/_authenticated/usuarios'
 
 const IndexRoute = IndexRouteImport.update({
@@ -65,6 +66,11 @@ const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   path: '/painel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedPlanilhaRoute = AuthenticatedPlanilhaRouteImport.update({
+  id: '/planilha',
+  path: '/planilha',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedUsuariosRoute = AuthenticatedUsuariosRouteImport.update({
   id: '/usuarios',
   path: '/usuarios',
@@ -80,6 +86,7 @@ export interface FileRoutesByFullPath {
   '/folha': typeof AuthenticatedFolhaRoute
   '/mensalidades': typeof AuthenticatedMensalidadesRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/planilha': typeof AuthenticatedPlanilhaRoute
   '/usuarios': typeof AuthenticatedUsuariosRoute
 }
 export interface FileRoutesByTo {
@@ -91,6 +98,7 @@ export interface FileRoutesByTo {
   '/folha': typeof AuthenticatedFolhaRoute
   '/mensalidades': typeof AuthenticatedMensalidadesRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/planilha': typeof AuthenticatedPlanilhaRoute
   '/usuarios': typeof AuthenticatedUsuariosRoute
 }
 export interface FileRoutesById {
@@ -104,6 +112,7 @@ export interface FileRoutesById {
   '/_authenticated/folha': typeof AuthenticatedFolhaRoute
   '/_authenticated/mensalidades': typeof AuthenticatedMensalidadesRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/planilha': typeof AuthenticatedPlanilhaRoute
   '/_authenticated/usuarios': typeof AuthenticatedUsuariosRoute
 }
 export interface FileRouteTypes {
@@ -117,6 +126,7 @@ export interface FileRouteTypes {
     | '/folha'
     | '/mensalidades'
     | '/painel'
+    | '/planilha'
     | '/usuarios'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -128,6 +138,7 @@ export interface FileRouteTypes {
     | '/folha'
     | '/mensalidades'
     | '/painel'
+    | '/planilha'
     | '/usuarios'
   id:
     | '__root__'
@@ -140,6 +151,7 @@ export interface FileRouteTypes {
     | '/_authenticated/folha'
     | '/_authenticated/mensalidades'
     | '/_authenticated/painel'
+    | '/_authenticated/planilha'
     | '/_authenticated/usuarios'
   fileRoutesById: FileRoutesById
 }
@@ -214,6 +226,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPainelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/planilha': {
+      id: '/_authenticated/planilha'
+      path: '/planilha'
+      fullPath: '/planilha'
+      preLoaderRoute: typeof AuthenticatedPlanilhaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/usuarios': {
       id: '/_authenticated/usuarios'
       path: '/usuarios'
@@ -231,6 +250,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedFolhaRoute: typeof AuthenticatedFolhaRoute
   AuthenticatedMensalidadesRoute: typeof AuthenticatedMensalidadesRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedPlanilhaRoute: typeof AuthenticatedPlanilhaRoute
   AuthenticatedUsuariosRoute: typeof AuthenticatedUsuariosRoute
 }
 
@@ -241,6 +261,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedFolhaRoute: AuthenticatedFolhaRoute,
   AuthenticatedMensalidadesRoute: AuthenticatedMensalidadesRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedPlanilhaRoute: AuthenticatedPlanilhaRoute,
   AuthenticatedUsuariosRoute: AuthenticatedUsuariosRoute,
 }
 
