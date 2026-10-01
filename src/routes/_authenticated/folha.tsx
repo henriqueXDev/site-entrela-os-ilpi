@@ -51,6 +51,7 @@ function FolhaPage() {
   const [year, setYear] = useState("todos");
   const [month, setMonth] = useState("todos");
   const [editing, setEditing] = useState<Folha | null>(null);
+  const { canEdit } = useRole();
 
   const years = yearsFrom(data.map((r) => r.mes_referencia ?? r.data_pagamento));
   const rows = data.filter((r) =>
@@ -135,7 +136,7 @@ function FolhaPage() {
                       >
                         <Trash2 className="h-3.5 w-3.5 text-destructive" />
                       </Button>
-                    </div>
+                    </div>)}
                   </td>
                 </tr>
               ))}

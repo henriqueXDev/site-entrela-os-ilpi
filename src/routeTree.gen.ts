@@ -18,6 +18,7 @@ import { Route as AuthenticatedFluxoRouteImport } from './routes/_authenticated/
 import { Route as AuthenticatedFolhaRouteImport } from './routes/_authenticated/folha'
 import { Route as AuthenticatedMensalidadesRouteImport } from './routes/_authenticated/mensalidades'
 import { Route as AuthenticatedPainelRouteImport } from './routes/_authenticated/painel'
+import { Route as AuthenticatedUsuariosRouteImport } from './routes/_authenticated/usuarios'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -64,6 +65,11 @@ const AuthenticatedPainelRoute = AuthenticatedPainelRouteImport.update({
   path: '/painel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedUsuariosRoute = AuthenticatedUsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -74,6 +80,7 @@ export interface FileRoutesByFullPath {
   '/folha': typeof AuthenticatedFolhaRoute
   '/mensalidades': typeof AuthenticatedMensalidadesRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/usuarios': typeof AuthenticatedUsuariosRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -84,6 +91,7 @@ export interface FileRoutesByTo {
   '/folha': typeof AuthenticatedFolhaRoute
   '/mensalidades': typeof AuthenticatedMensalidadesRoute
   '/painel': typeof AuthenticatedPainelRoute
+  '/usuarios': typeof AuthenticatedUsuariosRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -96,6 +104,7 @@ export interface FileRoutesById {
   '/_authenticated/folha': typeof AuthenticatedFolhaRoute
   '/_authenticated/mensalidades': typeof AuthenticatedMensalidadesRoute
   '/_authenticated/painel': typeof AuthenticatedPainelRoute
+  '/_authenticated/usuarios': typeof AuthenticatedUsuariosRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -108,6 +117,7 @@ export interface FileRouteTypes {
     | '/folha'
     | '/mensalidades'
     | '/painel'
+    | '/usuarios'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/folha'
     | '/mensalidades'
     | '/painel'
+    | '/usuarios'
   id:
     | '__root__'
     | '/'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/_authenticated/folha'
     | '/_authenticated/mensalidades'
     | '/_authenticated/painel'
+    | '/_authenticated/usuarios'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -202,6 +214,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedPainelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/usuarios': {
+      id: '/_authenticated/usuarios'
+      path: '/usuarios'
+      fullPath: '/usuarios'
+      preLoaderRoute: typeof AuthenticatedUsuariosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
@@ -212,6 +231,7 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedFolhaRoute: typeof AuthenticatedFolhaRoute
   AuthenticatedMensalidadesRoute: typeof AuthenticatedMensalidadesRoute
   AuthenticatedPainelRoute: typeof AuthenticatedPainelRoute
+  AuthenticatedUsuariosRoute: typeof AuthenticatedUsuariosRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
@@ -221,6 +241,7 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedFolhaRoute: AuthenticatedFolhaRoute,
   AuthenticatedMensalidadesRoute: AuthenticatedMensalidadesRoute,
   AuthenticatedPainelRoute: AuthenticatedPainelRoute,
+  AuthenticatedUsuariosRoute: AuthenticatedUsuariosRoute,
 }
 
 const AuthenticatedRouteRouteWithChildren =

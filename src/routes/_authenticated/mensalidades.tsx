@@ -55,6 +55,7 @@ function Mensalidades() {
   const [year, setYear] = useState("todos");
   const [month, setMonth] = useState("todos");
   const [editing, setEditing] = useState<Mensalidade | null>(null);
+  const { canEdit } = useRole();
   const [repetir, setRepetir] = useState(false);
 
   const years = yearsFrom(data.map((r) => r.mes_referencia));
@@ -80,9 +81,9 @@ function Mensalidades() {
       description="Um lançamento por residente e mês."
       actions={
         <div className="flex gap-2">
-          <Button variant="outline" onClick={() => setRepetir(true)}>
+          {canEdit && (<Button variant="outline" onClick={() => setRepetir(true)}>
             <CopyPlus className="mr-1 h-4 w-4" /> Repetir mês anterior
-          </Button>
+          </Button>)}
           <NewEntryDialog defaultTab="mensalidade" />
         </div>
       }
@@ -150,7 +151,7 @@ function Mensalidades() {
                       >
                         <Trash2 className="h-3.5 w-3.5 text-destructive" />
                       </Button>
-                    </div>
+                    </div>)}
                   </td>
                 </tr>
               ))}

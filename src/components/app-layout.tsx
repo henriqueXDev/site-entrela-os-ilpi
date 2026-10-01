@@ -6,6 +6,7 @@ import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useRole } from "@/lib/use-role";
 
 const NAV = [
   { to: "/painel", label: "Visão geral" },
@@ -14,6 +15,7 @@ const NAV = [
   { to: "/despesas", label: "Despesas" },
   { to: "/folha", label: "Folha de pagamento" },
   { to: "/fluxo", label: "Fluxo de caixa" },
+  { to: "/usuarios", label: "Usuários", admin: true },
 ] as const;
 
 export function AppLayout({
@@ -30,6 +32,8 @@ export function AppLayout({
   const navigate = useNavigate();
   const qc = useQueryClient();
   const [open, setOpen] = useState(false);
+  const { isAdmin } = useRole();
+  const nav = NAV.filter((i) => !("admin" in i) || isAdmin);
 
   async function signOut() {
     await qc.cancelQueries();
@@ -46,7 +50,7 @@ export function AppLayout({
             Entrelaços
           </Link>
           <nav className="hidden items-center gap-1 lg:flex">
-            {NAV.map((item) => (
+            {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}
@@ -80,7 +84,7 @@ export function AppLayout({
           )}
         >
           <nav className="grid gap-1 pt-2">
-            {NAV.map((item) => (
+            {nav.map((item) => (
               <Link
                 key={item.to}
                 to={item.to}

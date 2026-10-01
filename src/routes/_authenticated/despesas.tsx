@@ -53,6 +53,7 @@ function Despesas() {
   const [year, setYear] = useState("todos");
   const [month, setMonth] = useState("todos");
   const [editing, setEditing] = useState<Despesa | null>(null);
+  const { canEdit } = useRole();
 
   const years = yearsFrom(data.map((r) => r.mes_referencia ?? r.data_vencimento));
   const rows = data.filter((r) =>
@@ -134,7 +135,7 @@ function Despesas() {
                       >
                         <Trash2 className="h-3.5 w-3.5 text-destructive" />
                       </Button>
-                    </div>
+                    </div>)}
                   </td>
                 </tr>
               ))}
