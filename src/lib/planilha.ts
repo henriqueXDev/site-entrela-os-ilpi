@@ -13,12 +13,12 @@ async function loadExcel() {
 function raw(cell: ExcelJS.Cell): unknown {
   const v = cell.value as unknown;
   if (v && typeof v === "object" && !(v instanceof Date)) {
-    const o = v as Record<string, unknown>;
-    if ("result" in o && o.result != null && typeof o.result !== "object") return o.result;
-    if ("result" in o && o.result instanceof Date) return o.result;
-    if ("richText" in o) return (o.richText as { text: string }[]).map((t) => t.text).join("");
-    if ("text" in o) return o.text;
-    const f = (o.formula ?? o.sharedFormula) as string | undefined;
+    const o = v as { result?: unknown; richText?: { text: string }[]; text?: unknown; formula?: string; sharedFormula?: string };
+    if (o.result != null && typeof o.result !== "object") return o.result;
+    if (o.result instanceof Date) return o.result;
+    if (o.richText) return o.richText.map((t) => t.text).join("");
+    if (o.text != null) return o.text;
+    const f = o.formula ?? o.sharedFormula;
     const m = f && /^DATE\((\d+),(\d+),(\d+)\)$/.exec(f.replace(/\s/g, ""));
     if (m) return `${m[1]}-${m[2]!.padStart(2, "0")}-${m[3]!.padStart(2, "0")}`;
     return null;
