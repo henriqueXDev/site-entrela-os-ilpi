@@ -1,0 +1,7 @@
+CREATE FUNCTION public.protect_patient_provenance() RETURNS trigger LANGUAGE plpgsql SET search_path = public AS $$ BEGIN IF NEW.created_by IS DISTINCT FROM OLD.created_by OR NEW.created_at IS DISTINCT FROM OLD.created_at OR NEW.id IS DISTINCT FROM OLD.id THEN RAISE EXCEPTION 'Patient record provenance cannot be changed'; END IF; NEW.updated_at := now(); RETURN NEW; END; $$;
+CREATE TRIGGER protect_patient_provenance BEFORE UPDATE ON public.pacientes FOR EACH ROW EXECUTE FUNCTION public.protect_patient_provenance();
+ALTER POLICY "clinical patients edit" ON public.pacientes WITH CHECK (public.clinical_allowed(auth.uid(), 'edit'));
+CREATE FUNCTION public.reject_clinical_record_changes() RETURNS trigger LANGUAGE plpgsql SET search_path = public AS $$ BEGIN RAISE EXCEPTION 'Clinical records are append-only; create a rectification instead'; END; $$;
+CREATE TRIGGER protect_evolucoes BEFORE UPDATE OR DELETE ON public.evolucoes FOR EACH ROW EXECUTE FUNCTION public.reject_clinical_record_changes();
+CREATE TRIGGER protect_prescricoes BEFORE UPDATE OR DELETE ON public.prescricoes FOR EACH ROW EXECUTE FUNCTION public.reject_clinical_record_changes();
+CREATE TRIGGER protect_clinical_audit BEFORE UPDATE OR DELETE ON public.clinical_audit FOR EACH ROW EXECUTE FUNCTION public.reject_clinical_record_changes();
