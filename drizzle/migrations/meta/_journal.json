@@ -43,6 +43,20 @@
       "when": 1790964951139,
       "tag": "0005_validate_clinical_rectification_patient",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1790967361151,
+      "tag": "0006_clinical_documents_and_exams",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1790967381529,
+      "tag": "0007_allow_failed_clinical_upload_cleanup",
+      "breakpoints": true
     }
   ]
 }

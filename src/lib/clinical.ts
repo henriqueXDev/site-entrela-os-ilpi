@@ -5,6 +5,7 @@ import type { Database } from "@/integrations/supabase/types";
 export type Patient = Database["public"]["Tables"]["pacientes"]["Row"];
 export type Evolution = Database["public"]["Tables"]["evolucoes"]["Row"];
 export type Prescription = Database["public"]["Tables"]["prescricoes"]["Row"];
+export type ClinicalDocument = Database["public"]["Tables"]["clinical_documents"]["Row"];
 export type ClinicalAction = "view" | "create" | "edit" | "upload" | "download" | "print" | "request_delete";
 export const PROFILES = ["medico", "enfermagem", "recepcao", "financeiro", "leitura"] as const;
 export const PROFILE_LABELS: Record<string, string> = { medico: "Profissional de saúde", enfermagem: "Enfermagem", recepcao: "Recepção", financeiro: "Financeiro", leitura: "Somente leitura" };
@@ -37,11 +38,12 @@ export async function getPatients() {
 }
 
 export async function getPatientRecords(id: string) {
-  const [{ data: patient, error: patientError }, { data: evolutions, error: evolutionError }, { data: prescriptions, error: prescriptionError }] = await Promise.all([
+  const [{ data: patient, error: patientError }, { data: evolutions, error: evolutionError }, { data: prescriptions, error: prescriptionError }, { data: documents, error: documentError }] = await Promise.all([
     supabase.from("pacientes").select("*").eq("id", id).single(),
     supabase.from("evolucoes").select("*").eq("paciente_id", id).order("data_atendimento", { ascending: false }),
     supabase.from("prescricoes").select("*").eq("paciente_id", id).order("data_prescricao", { ascending: false }),
+    supabase.from("clinical_documents").select("*").eq("paciente_id", id).order("created_at", { ascending: false }),
   ]);
-  if (patientError || evolutionError || prescriptionError) throw patientError ?? evolutionError ?? prescriptionError;
-  return { patient, evolutions: evolutions ?? [], prescriptions: prescriptions ?? [] };
+  if (patientError || evolutionError || prescriptionError || documentError) throw patientError ?? evolutionError ?? prescriptionError ?? documentError;
+  return { patient, evolutions: evolutions ?? [], prescriptions: prescriptions ?? [], documents: documents ?? [] };
 }
