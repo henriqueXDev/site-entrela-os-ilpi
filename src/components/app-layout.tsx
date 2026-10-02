@@ -10,6 +10,7 @@ import { useRole } from "@/lib/use-role";
 
 const NAV = [
   { to: "/painel", label: "Visão geral" },
+  { to: "/dashboard", label: "Dashboard" },
   { to: "/entradas", label: "Entradas mensais" },
   { to: "/mensalidades", label: "Mensalidades" },
   { to: "/despesas", label: "Despesas" },
