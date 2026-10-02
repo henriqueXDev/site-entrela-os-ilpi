@@ -20,7 +20,7 @@ export function useClinicalPermissions() {
       const [{ data: roles, error: roleError }, { data: assignments, error: assignmentError }, { data: permissions, error: permissionError }] = await Promise.all([
         supabase.from("user_roles").select("role").eq("user_id", auth.user.id),
         supabase.from("clinical_assignments").select("profile").eq("user_id", auth.user.id).maybeSingle(),
-        supabase.from("clinical_permissions").select("action, allowed"),
+        supabase.from("clinical_permissions").select("profile, action, allowed"),
       ]);
       if (roleError || assignmentError || permissionError) throw roleError ?? assignmentError ?? permissionError;
       if (roles?.some(r => r.role === "admin")) return { profile: "admin", permissions: ACTIONS };
