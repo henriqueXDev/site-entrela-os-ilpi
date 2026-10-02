@@ -17,6 +17,7 @@ const NAV = [
   { to: "/folha", label: "Folha de pagamento" },
   { to: "/fluxo", label: "Fluxo de caixa" },
   { to: "/planilha", label: "Planilha" },
+  { to: "/prontuario", label: "Prontuário" },
   { to: "/usuarios", label: "Usuários", admin: true },
 ] as const;
 

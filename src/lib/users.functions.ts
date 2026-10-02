@@ -18,17 +18,32 @@ export const listUsers = createServerFn({ method: "GET" })
     const { data, error } = await supabaseAdmin.auth.admin.listUsers({ perPage: 1000 });
     if (error) throw new Error(error.message);
     const { data: roles } = await supabaseAdmin.from("user_roles").select("user_id, role");
+    const { data: assignments } = await supabaseAdmin.from("clinical_assignments").select("user_id, profile");
     return data.users.map((u) => {
       const r = (roles ?? []).filter((x) => x.user_id === u.id).map((x) => x.role);
-      const role = r.includes("admin") ? "admin" : r.includes("editor") ? "editor" : "viewer";
+      const role = r.includes("admin") ? "admin" : r.includes("editor") ? "editor" : r.includes("viewer") ? "viewer" : "";
       return {
         id: u.id,
         email: u.email ?? "",
         created_at: u.created_at,
         last_sign_in_at: u.last_sign_in_at ?? null,
-        role: role as "admin" | "editor" | "viewer",
+        role: role as "admin" | "editor" | "viewer" | "",
+        clinicalProfile: assignments?.find((a) => a.user_id === u.id)?.profile ?? "",
       };
     });
+  });
+
+export const setClinicalProfile = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ userId: z.string().uuid(), profile: z.enum(["medico", "enfermagem", "recepcao", "financeiro", "leitura", ""]) }).parse(d))
+  .handler(async ({ data, context }) => {
+    await assertAdmin(context);
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const result = data.profile
+      ? await supabaseAdmin.from("clinical_assignments").upsert({ user_id: data.userId, profile: data.profile })
+      : await supabaseAdmin.from("clinical_assignments").delete().eq("user_id", data.userId);
+    if (result.error) throw new Error(result.error.message);
+    return { ok: true };
   });
 
 export const setUserRole = createServerFn({ method: "POST" })

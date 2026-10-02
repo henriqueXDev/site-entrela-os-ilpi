@@ -22,6 +22,8 @@ export const Route = createFileRoute("/auth")({
         property: "og:description",
         content: "Acesso da equipe ao painel financeiro da ILPI Entrelaços.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: AuthPage,

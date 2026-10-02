@@ -15,6 +15,34 @@
       "when": 1790733090178,
       "tag": "0001_user_roles_access",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1790964584019,
+      "tag": "0002_clinical_records_phase_one",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1790964860880,
+      "tag": "0003_protect_clinical_record_provenance",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1790964876231,
+      "tag": "0004_allow_clinical_rectification_by_edit_permission",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1790964951139,
+      "tag": "0005_validate_clinical_rectification_patient",
+      "breakpoints": true
     }
   ]
 }

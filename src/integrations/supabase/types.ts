@@ -14,6 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
+      clinical_assignments: {
+        Row: {
+          assigned_at: string
+          profile: string
+          user_id: string
+        }
+        Insert: {
+          assigned_at?: string
+          profile: string
+          user_id: string
+        }
+        Update: {
+          assigned_at?: string
+          profile?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      clinical_audit: {
+        Row: {
+          action: string
+          actor_id: string
+          details: Json
+          id: string
+          occurred_at: string
+          paciente_id: string | null
+          record_id: string | null
+          record_type: string
+        }
+        Insert: {
+          action: string
+          actor_id: string
+          details?: Json
+          id?: string
+          occurred_at?: string
+          paciente_id?: string | null
+          record_id?: string | null
+          record_type: string
+        }
+        Update: {
+          action?: string
+          actor_id?: string
+          details?: Json
+          id?: string
+          occurred_at?: string
+          paciente_id?: string | null
+          record_id?: string | null
+          record_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinical_audit_paciente_id_fkey"
+            columns: ["paciente_id"]
+            isOneToOne: false
+            referencedRelation: "pacientes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      clinical_permissions: {
+        Row: {
+          action: string
+          allowed: boolean
+          profile: string
+        }
+        Insert: {
+          action: string
+          allowed?: boolean
+          profile: string
+        }
+        Update: {
+          action?: string
+          allowed?: boolean
+          profile?: string
+        }
+        Relationships: []
+      }
       configuracoes: {
         Row: {
           chave: string
@@ -79,6 +156,75 @@ export type Database = {
           valor?: number | null
         }
         Relationships: []
+      }
+      evolucoes: {
+        Row: {
+          condutas: string | null
+          created_at: string
+          created_by: string
+          data_atendimento: string
+          especialidade: string | null
+          evolucao: string
+          id: string
+          motivo_retificacao: string | null
+          observacoes: string | null
+          orientacoes: string | null
+          paciente_id: string
+          profissional: string
+          queixa: string | null
+          retifica_id: string | null
+          tipo_atendimento: string | null
+        }
+        Insert: {
+          condutas?: string | null
+          created_at?: string
+          created_by?: string
+          data_atendimento?: string
+          especialidade?: string | null
+          evolucao: string
+          id?: string
+          motivo_retificacao?: string | null
+          observacoes?: string | null
+          orientacoes?: string | null
+          paciente_id: string
+          profissional: string
+          queixa?: string | null
+          retifica_id?: string | null
+          tipo_atendimento?: string | null
+        }
+        Update: {
+          condutas?: string | null
+          created_at?: string
+          created_by?: string
+          data_atendimento?: string
+          especialidade?: string | null
+          evolucao?: string
+          id?: string
+          motivo_retificacao?: string | null
+          observacoes?: string | null
+          orientacoes?: string | null
+          paciente_id?: string
+          profissional?: string
+          queixa?: string | null
+          retifica_id?: string | null
+          tipo_atendimento?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "evolucoes_paciente_id_fkey"
+            columns: ["paciente_id"]
+            isOneToOne: false
+            referencedRelation: "pacientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "evolucoes_retifica_id_fkey"
+            columns: ["retifica_id"]
+            isOneToOne: false
+            referencedRelation: "evolucoes"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       folha_pagamento: {
         Row: {
@@ -176,6 +322,117 @@ export type Database = {
         }
         Relationships: []
       }
+      pacientes: {
+        Row: {
+          created_at: string
+          created_by: string
+          documento: string | null
+          foto_url: string | null
+          id: string
+          nascimento: string | null
+          nome: string
+          profissional_responsavel: string | null
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string
+          documento?: string | null
+          foto_url?: string | null
+          id?: string
+          nascimento?: string | null
+          nome: string
+          profissional_responsavel?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          documento?: string | null
+          foto_url?: string | null
+          id?: string
+          nascimento?: string | null
+          nome?: string
+          profissional_responsavel?: string | null
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      prescricoes: {
+        Row: {
+          created_at: string
+          created_by: string
+          data_prescricao: string
+          dosagem: string
+          duracao: string | null
+          frequencia: string | null
+          id: string
+          medicamento: string
+          motivo_retificacao: string | null
+          orientacoes: string | null
+          paciente_id: string
+          prescritor: string
+          quantidade: string | null
+          retifica_id: string | null
+          status: string
+          via: string | null
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string
+          data_prescricao?: string
+          dosagem: string
+          duracao?: string | null
+          frequencia?: string | null
+          id?: string
+          medicamento: string
+          motivo_retificacao?: string | null
+          orientacoes?: string | null
+          paciente_id: string
+          prescritor: string
+          quantidade?: string | null
+          retifica_id?: string | null
+          status?: string
+          via?: string | null
+        }
+        Update: {
+          created_at?: string
+          created_by?: string
+          data_prescricao?: string
+          dosagem?: string
+          duracao?: string | null
+          frequencia?: string | null
+          id?: string
+          medicamento?: string
+          motivo_retificacao?: string | null
+          orientacoes?: string | null
+          paciente_id?: string
+          prescritor?: string
+          quantidade?: string | null
+          retifica_id?: string | null
+          status?: string
+          via?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "prescricoes_paciente_id_fkey"
+            columns: ["paciente_id"]
+            isOneToOne: false
+            referencedRelation: "pacientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "prescricoes_retifica_id_fkey"
+            columns: ["retifica_id"]
+            isOneToOne: false
+            referencedRelation: "prescricoes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           created_at: string
@@ -203,12 +460,25 @@ export type Database = {
     }
     Functions: {
       can_edit: { Args: { _user_id: string }; Returns: boolean }
+      clinical_allowed: {
+        Args: { _action: string; _user_id: string }
+        Returns: boolean
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
           _user_id: string
         }
         Returns: boolean
+      }
+      log_clinical_access: {
+        Args: {
+          _action: string
+          _patient_id: string
+          _record_id?: string
+          _record_type?: string
+        }
+        Returns: undefined
       }
     }
     Enums: {

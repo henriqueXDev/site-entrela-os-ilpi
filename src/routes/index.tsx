@@ -18,6 +18,8 @@ export const Route = createFileRoute("/")({
         content:
           "Mensalidades, despesas, folha e fluxo de caixa da instituição em um painel simples.",
       },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: Index,
