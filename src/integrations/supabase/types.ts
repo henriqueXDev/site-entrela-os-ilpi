@@ -73,6 +73,91 @@ export type Database = {
           },
         ]
       }
+      clinical_documents: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          document_date: string | null
+          encounter_id: string | null
+          id: string
+          kind: string
+          mime_type: string
+          original_filename: string
+          paciente_id: string
+          replaces_id: string | null
+          size_bytes: number
+          status: string
+          storage_path: string
+          title: string
+          uploaded_by: string
+          version_group_id: string
+          version_number: number
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description?: string | null
+          document_date?: string | null
+          encounter_id?: string | null
+          id?: string
+          kind: string
+          mime_type: string
+          original_filename: string
+          paciente_id: string
+          replaces_id?: string | null
+          size_bytes: number
+          status?: string
+          storage_path: string
+          title: string
+          uploaded_by?: string
+          version_group_id?: string
+          version_number?: number
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          document_date?: string | null
+          encounter_id?: string | null
+          id?: string
+          kind?: string
+          mime_type?: string
+          original_filename?: string
+          paciente_id?: string
+          replaces_id?: string | null
+          size_bytes?: number
+          status?: string
+          storage_path?: string
+          title?: string
+          uploaded_by?: string
+          version_group_id?: string
+          version_number?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinical_documents_encounter_id_fkey"
+            columns: ["encounter_id"]
+            isOneToOne: false
+            referencedRelation: "evolucoes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "clinical_documents_paciente_id_fkey"
+            columns: ["paciente_id"]
+            isOneToOne: false
+            referencedRelation: "pacientes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "clinical_documents_replaces_id_fkey"
+            columns: ["replaces_id"]
+            isOneToOne: false
+            referencedRelation: "clinical_documents"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clinical_permissions: {
         Row: {
           action: string
@@ -478,6 +563,10 @@ export type Database = {
           _record_id?: string
           _record_type?: string
         }
+        Returns: undefined
+      }
+      log_clinical_file_action: {
+        Args: { _action: string; _document_id: string }
         Returns: undefined
       }
     }
