@@ -115,6 +115,7 @@ function UsuariosPage() {
                         value={u.role}
                         onChange={(e) => change(u.id, e.target.value as Role)}
                       >
+                        <option value="" disabled>Aguardando autorização</option>
                         {(Object.keys(LABEL) as Role[]).map((r) => (
                           <option key={r} value={r}>
                             {LABEL[r]}

@@ -21,13 +21,13 @@ export const listUsers = createServerFn({ method: "GET" })
     const { data: assignments } = await supabaseAdmin.from("clinical_assignments").select("user_id, profile");
     return data.users.map((u) => {
       const r = (roles ?? []).filter((x) => x.user_id === u.id).map((x) => x.role);
-      const role = r.includes("admin") ? "admin" : r.includes("editor") ? "editor" : "viewer";
+      const role = r.includes("admin") ? "admin" : r.includes("editor") ? "editor" : r.includes("viewer") ? "viewer" : "";
       return {
         id: u.id,
         email: u.email ?? "",
         created_at: u.created_at,
         last_sign_in_at: u.last_sign_in_at ?? null,
-        role: role as "admin" | "editor" | "viewer",
+        role: role as "admin" | "editor" | "viewer" | "",
         clinicalProfile: assignments?.find((a) => a.user_id === u.id)?.profile ?? "",
       };
     });
