@@ -118,7 +118,7 @@ function ProntuarioPage() {
         </>}
       </div>
     </div>
-    <Dialog open={!!dialog} onOpenChange={open => { if (!open) closeDialog(); }}><DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl"><DialogHeader><DialogTitle>{dialog === "patient" ? "Novo paciente" : correcting ? "Retificar registro" : dialog === "evolution" ? "Registrar evolução" : "Nova receita"}</DialogTitle></DialogHeader>{dialog === "patient" && <PatientForm onSaved={onSaved}/ >}{dialog === "evolution" && selected && <EvolutionForm patientId={selected} original={correcting as Evolution | null} onSaved={() => onSaved()}/ >}{dialog === "prescription" && selected && <PrescriptionForm patientId={selected} original={correcting as Prescription | null} onSaved={() => onSaved()}/>}</DialogContent></Dialog>
+    <Dialog open={!!dialog} onOpenChange={open => { if (!open) closeDialog(); }}><DialogContent className="max-h-[90vh] overflow-y-auto sm:max-w-2xl"><DialogHeader><DialogTitle>{dialog === "patient" ? "Novo paciente" : correcting ? "Retificar registro" : dialog === "evolution" ? "Registrar evolução" : "Nova receita"}</DialogTitle></DialogHeader>{dialog === "patient" && <PatientForm onSaved={onSaved}/>}{dialog === "evolution" && selected && <EvolutionForm patientId={selected} original={correcting as Evolution | null} onSaved={() => onSaved()}/>}{dialog === "prescription" && selected && <PrescriptionForm patientId={selected} original={correcting as Prescription | null} onSaved={() => onSaved()}/>}</DialogContent></Dialog>
   </AppLayout>;
 }
 function Unavailable({ title }: { title: string }) { return <div className="py-10 text-center text-muted-foreground"><FileClock className="mx-auto mb-3 h-6 w-6"/><p>{title} estarão disponíveis na próxima etapa.</p></div>; }
