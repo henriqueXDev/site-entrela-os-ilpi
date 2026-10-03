@@ -64,6 +64,13 @@
       "when": 1790987450996,
       "tag": "0008_harden_clinical_document_versions",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1790988730550,
+      "tag": "0009_clinical_deletion_review",
+      "breakpoints": true
     }
   ]
 }
