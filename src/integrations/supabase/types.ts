@@ -73,6 +73,56 @@ export type Database = {
           },
         ]
       }
+      clinical_deletion_requests: {
+        Row: {
+          decided_at: string | null
+          decided_by: string | null
+          decision_reason: string | null
+          id: string
+          paciente_id: string
+          reason: string
+          record_id: string
+          record_type: string
+          requested_at: string
+          requested_by: string
+          status: string
+        }
+        Insert: {
+          decided_at?: string | null
+          decided_by?: string | null
+          decision_reason?: string | null
+          id?: string
+          paciente_id: string
+          reason: string
+          record_id: string
+          record_type: string
+          requested_at?: string
+          requested_by: string
+          status?: string
+        }
+        Update: {
+          decided_at?: string | null
+          decided_by?: string | null
+          decision_reason?: string | null
+          id?: string
+          paciente_id?: string
+          reason?: string
+          record_id?: string
+          record_type?: string
+          requested_at?: string
+          requested_by?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "clinical_deletion_requests_paciente_id_fkey"
+            columns: ["paciente_id"]
+            isOneToOne: false
+            referencedRelation: "pacientes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clinical_documents: {
         Row: {
           category: string
@@ -549,6 +599,10 @@ export type Database = {
         Args: { _action: string; _user_id: string }
         Returns: boolean
       }
+      decide_clinical_deletion: {
+        Args: { _decision: string; _reason: string; _request_id: string }
+        Returns: undefined
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -568,6 +622,15 @@ export type Database = {
       log_clinical_file_action: {
         Args: { _action: string; _document_id: string }
         Returns: undefined
+      }
+      request_clinical_deletion: {
+        Args: {
+          _patient_id: string
+          _reason: string
+          _record_id: string
+          _record_type: string
+        }
+        Returns: string
       }
     }
     Enums: {
