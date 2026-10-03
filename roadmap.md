@@ -13,3 +13,10 @@
 - [x] Metadados, pesquisa, visualização e download por permissão.
 - [x] Novas versões preservando os arquivos anteriores.
 - [x] Auditoria de envio, visualização e download.
+
+## Terceira etapa
+
+- [ ] Solicitar exclusão com motivo e sem apagar registros.
+- [ ] Analisar solicitações como administrador, com decisão justificada.
+- [ ] Preservar e auditar todo o histórico e impedir pedidos duplicados.
+- [ ] Validar a experiência no computador e celular.
